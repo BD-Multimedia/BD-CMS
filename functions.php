@@ -136,12 +136,64 @@
 	    if(isset($_SESSION['user'])){
 	    	$user = $_SESSION['user'];
 	    	if(isUserAdmin($user)){
-	    		$stmt = $connection->prepare('SELECT * FROM `cms_project_links` WHERE `login` = 0 OR `login` = 2');
+	    		$stmt = $connection->prepare('SELECT inhoud,link,admin FROM `cms_project_links` WHERE `login` = 0 OR `login` = 2');
 	    	}else{
-	    		$stmt = $connection->prepare('SELECT * FROM `cms_project_links` WHERE `login` = 0 OR `login` = 2 AND `admin` = 0');
+	    		$stmt = $connection->prepare('SELECT inhoud,link,admin FROM `cms_project_links` WHERE `login` = 0 OR `login` = 2 AND `admin` = 0');
 	    	}
 	    }else{
-	    	$stmt = $connection->prepare('SELECT * FROM `cms_project_links` WHERE `login` = 0  OR `login` = 1');
+	    	$stmt = $connection->prepare('SELECT inhoud,link,admin FROM `cms_project_links` WHERE `login` = 0  OR `login` = 1');
+	    }
+	    $stmt->execute();
+
+	    //resultaten ophalen
+	    $result = $stmt-> get_result();
+	    if(!$result)
+	    {
+	        die('Query error: '.$connection->error);
+	    }
+	    print '<nav id="main-nav">
+			
+			<h2>Main menu</h2>
+			<ul>';
+
+	    while($row =$result->fetch_array(MYSQL_ASSOC))
+	    {
+	    	if($row['admin']==0)
+	    	{
+	    		$activelink = '/BD-CMS/'.$row['link'];
+		    	if($activelink == $_SERVER['PHP_SELF']){$active = "active";}else{$active=" ";};
+		        //print '<li>';
+		        if($row['inhoud'] == 'Login'){
+		        	print '<li id="login"><a href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
+		        }else{
+		        	print '<li><a class="'.$active.'" href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
+	        	}
+	    	}
+	    }
+	    print '<li id="cmsbanner">
+					Powered by BD_CMS by <a href="http://www.bdmultimedia.be">BD Multimedia</a>
+				</li>';
+		print '</ul>';
+
+		print '</nav>';
+
+		print '<nav id="admin-nav">';
+		
+		print '<ul>';
+		$connection->close();
+	    $result->close();
+
+	    $connection = connectDB();
+
+	    if(isset($_SESSION['user'])){
+	    	$user = $_SESSION['user'];
+	    	if(isUserAdmin($user)){
+	    		$stmt = $connection->prepare('SELECT inhoud,link,admin FROM `cms_project_links` WHERE `login` = 0 OR `login` = 2');
+	    	}else{
+	    		$stmt = $connection->prepare('SELECT inhoud,link,admin FROM `cms_project_links` WHERE `login` = 0 OR `login` = 2 AND `admin` = 0');
+	    	}
+	    }else{
+	    	$stmt = $connection->prepare('SELECT inhoud,link,admin FROM `cms_project_links` WHERE `login` = 0  OR `login` = 1');
 	    }
 	    $stmt->execute();
 
@@ -152,22 +204,33 @@
 	        die('Query error: '.$connection->error);
 	    }
 
-	    while($row =$result->fetch_array(MYSQL_ASSOC))
+		while($row =$result->fetch_array(MYSQL_ASSOC))
 	    {
-	    	$activelink = '/BD-CMS/'.$row['link'];
-	    	if($activelink == $_SERVER['PHP_SELF']){$active = "active";}else{$active=" ";};
-	        //print '<li>';
-	        if($row['inhoud'] == 'Login'){
-	        	print '<li id="login"><a href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
-	        }else{
-	        	print '<li><a class="'.$active.'" href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
-	        }
-	        //print '</li>';
+	    	if($row['admin']==1)
+	    	{
+	    		$activelink = '/BD-CMS/'.$row['link'];
+		    	if($activelink == $_SERVER['PHP_SELF']){$active = "active";}else{$active=" ";};
+		        //print '<li>';
+		        if($row['inhoud'] == 'Login'){
+		        	print '<li id="login"><a href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
+		        }else{
+		        	print '<li><a class="'.$active.'" href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
+	        	}
+	    	}
 	    }
-	    $connection->close();
+
+		$connection->close();
 	    $result->close();
-	    print '<li id="cmsbanner">
-					Powered by BD_CMS by <a href="http://www.bdmultimedia.be">BD Multimedia</a>
-				</li>';
+
+	    if(isset($_SESSION['user']))
+		{
+			print'<li><a href="'.$_SERVER['PHP_SELF'].'?logout=true">logout</a></li>';
+		}
+
+	    print '</ul>
+
+		</nav>';
 	}
 ?>
+
+			
