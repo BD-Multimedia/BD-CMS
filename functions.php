@@ -104,7 +104,7 @@
 	{
 		if(!isset($_SESSION["user"]))
 		{
-			$error = 'You are not logged in. Please login <a href="login.php">here</a>.';
+			$error = 'You are not logged in. Please login <a href="/nieuw/login.php">here</a>.';
 			redirect($error);
 		}
 		$user = $_SESSION['user'];
@@ -113,7 +113,7 @@
 
 	function redirect($error){
 		$_SESSION['error'] = $error;
-		header('location: redirect.php');
+		header('location:/nieuw/redirect.php');
 	}
 	
 

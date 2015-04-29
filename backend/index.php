@@ -1,12 +1,14 @@
 <?php  
   include_once("../functions.php");
   session_start();
-  checkUserLogin();
-  $user = checkUserLogin();
+  //checkUserLogin();
+  $user = $_SESSION['user'];
   if(!isUserAdmin($user))
   {
     redirect("You are not admin");
   }
+  $user = checkUserLogin();
+  
 
 ?>
 <!DOCTYPE html>
@@ -55,7 +57,6 @@
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
           </ul>
-          <
         </div>
       </div>
     </nav>
