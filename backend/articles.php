@@ -61,7 +61,11 @@ $webtitle = getContent('webtitle');
         <table>
           <thead>
             <tr>
-              <th colspan="2">Titel</th>
+              <th class="padding-left">Title</th>
+              <th class="hidden-xs">Author</th>
+              <th class="hidden-xs text-center">Date</th>
+              <th class="hidden-xs hidden-sm text-center">Last modified</th>
+              <th></th>
             </tr>
           </thead>
           <?php
@@ -73,6 +77,9 @@ $webtitle = getContent('webtitle');
             ?>
           <tr>
             <td><?php print $article['Title']; ?></td>
+            <td class="hidden-xs">Bram Derudder</td>
+            <td class="hidden-xs text-center">24/07/1993</td>
+            <td class="hidden-xs hidden-sm text-center">24/07/1995</td>
             <td class="text-right"><button class="btn btn-primary"><i class="fa fa-pencil-square"></i></button></td>
           </tr>
           <?php
