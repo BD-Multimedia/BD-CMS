@@ -73,6 +73,7 @@ $webtitle = getContent('webtitle');
             ?>
           <tr>
             <td><?php print $article['Title']; ?></td>
+            <td class="text-right"><button class="btn btn-primary"><i class="fa fa-pencil-square"></i></button></td>
           </tr>
           <?php
           }
