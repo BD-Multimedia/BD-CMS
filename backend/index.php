@@ -8,6 +8,31 @@
     redirect("You are not admin");
   }
   $user = checkUserLogin();
+
+  $webtitle = getContent('webtitle');
+
+
+  $connection = connectDB();
+  $stmt = $connection->prepare('SELECT COUNT(*) FROM `cms_project_articles`');
+    $stmt->execute();
+
+    $result = $stmt-> get_result();
+    
+    while($row =$result->fetch_array(MYSQL_ASSOC))
+    {
+        $numOfArticles = $row['COUNT(*)'];
+    }
+
+  $stmt = $connection->prepare('SELECT COUNT(*) FROM `cms_project_users`');
+    $stmt->execute();
+
+    $result = $stmt-> get_result();
+    
+    while($row =$result->fetch_array(MYSQL_ASSOC))
+    {
+        $numOfUsers = $row['COUNT(*)'];
+    }
+
   
 
 ?>
@@ -47,7 +72,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../index.php">Project name / link to main page</a>
+          <a class="navbar-brand" href="../index.php"><?php print $webtitle; ?></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -71,11 +96,11 @@
         </div>
 
         <div class="stat col-xs-6">
-          <h3># Articles</h3>
+          <h3><?php print $numOfArticles; ?> Articles</h3>
         </div>
 
         <div class="stat col-xs-6">
-          <h3># Registered users</h3>
+          <h3><?php print $numOfUsers; ?> Registered users</h3>
         </div>
 
         <div class="stat col-xs-6">

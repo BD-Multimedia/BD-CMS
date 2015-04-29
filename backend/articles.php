@@ -1,3 +1,8 @@
+<?php 
+include_once('../functions.php');
+$webtitle = getContent('webtitle');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,7 +39,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="../index.php">Project name / link to main page</a>
+          <a class="navbar-brand" href="../index.php"><?php print $webtitle; ?></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -54,15 +59,23 @@
       <section class="col-xs-12" id="articles">
 
         <table>
-
+          <?php
+          //foreachke van de artikels!
+          $articles = getContentArray();
+          //print_r($articles);
+          foreach($articles as $article)
+          {
+            ?>
           <tr>
-            <th>Titel</th>
+            <th><?php print $article['Title']; ?></th>
           </tr>
 
           <tr>
-            <td>Artikel 1</td>
+            <td><?php print $article['Text']; ?></td>
           </tr>
-
+          <?php
+          }
+          ?>
         </table>
 
       </section>      

@@ -104,7 +104,7 @@
 	{
 		if(!isset($_SESSION["user"]))
 		{
-			$error = 'You are not logged in. Please login <a href="/nieuw/login.php">here</a>.';
+			$error = 'You are not logged in. Please login <a href="/BD-CMS/login.php">here</a>.';
 			redirect($error);
 		}
 		$user = $_SESSION['user'];
@@ -113,7 +113,7 @@
 
 	function redirect($error){
 		$_SESSION['error'] = $error;
-		header('location:/nieuw/redirect.php');
+		header('location:/BD-CMS/redirect.php');
 	}
 	
 
@@ -154,11 +154,13 @@
 
 	    while($row =$result->fetch_array(MYSQL_ASSOC))
 	    {
+	    	$activelink = '/BD-CMS/'.$row['link'];
+	    	if($activelink == $_SERVER['PHP_SELF']){$active = "active";}else{$active=" ";};
 	        //print '<li>';
 	        if($row['inhoud'] == 'Login'){
 	        	print '<li id="login"><a href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
 	        }else{
-	        	print '<li><a href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
+	        	print '<li><a class="'.$active.'" href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
 	        }
 	        //print '</li>';
 	    }
