@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>BD-cms</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
+	
+	
+	<link href="css/custom.less" rel="stylesheet/less" type="text/css" />
+	
+	<script src="js/less.js"></script>
+	<script src="js/jquery.js"></script>
+
+	<script>
+
+	$(document).ready(function() {
+
+
+		$('#webdevelopment').animate({width: '95%'});
+		$('#webdesign').animate({width: '75%'});
+		$('#ux-design').animate({width: '60%'});
+
+		// Open menu
+		$('#menu-button').click(function(){
+			$('#main-nav').animate({right: '0px'}, 200);
+		});
+
+		$('#menu-button-close').click(function(){
+			$('#main-nav').animate({right: '-270px'}, 200);
+		});
+	});
+
+
+
+	</script>
+		
+	
+</head>
+
+<body>
+
+<div id="fluid-container">
+	
+	<header class="col-xs-12" id="site-header">
+
+		<h1>BD-cms</h1>
+
+		<button class="btn btn-default" id="menu-button">Menu</button>
+
+	</header>
+
+	<nav id="main-nav">
+		<button class="btn btn-default" id="menu-button-close">Close Menu</button>
+		<h2>Main menu</h2>
+		<ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="#">Link 2</a></li>
+			<li><a href="#">Link 3</a></li>
+			<li id="login"><a href="login.html" class="active">Login</a></li>
+		</ul>
+
+	</nav>
+
+	<section class="col-xs-12" id="author">
+
+			
+		<h2>Bram Derudder</h2>
+
+		<img src="img/profile-pic.jpg" alt="profile pic" class="img-circle col-xs-8 col-xs-offset-2">
+
+		<div class="clearfix"></div>
+
+		<section id="short-info">
+
+			<p class="lead">Korte informatie tekst. Lorum ipsum dolor sit amet. Lorum ipsum dolor sit amet. Lorum ipsum dolor sit amet.</p>
+
+		</section>
+
+		<div id="knowledge">
+			<h3>Points of Interest</h3>
+
+			<div class="progress">
+				<div class="progress-bar" id="webdevelopment" area-valuenow="95" area-valuemin="0" area-valuemax="100">Webdevelopment</div>
+			</div>
+
+			<div class="progress">
+				<div class="progress-bar" id="webdesign" area-valuenow="75" area-valuemin="0" area-valuemax="100">Webdesign</div>
+			</div>
+
+			<div class="progress">
+				<div class="progress-bar" id="ux-design" area-valuenow="60" area-valuemin="0" area-valuemax="100">UX-design</div>
+			</div>
+
+		</div>
+
+
+
+
+	
+
+	</section>
+	
+
+	
+</div>
+		
+</body>
+</html
