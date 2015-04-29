@@ -55,18 +55,12 @@
 
         <table>
 
-          <th>
-            <td>Titel</td>
-            <td>Auteur</td>
-            <td>Date creation</td>
-            <td>Last moderation</td>
-          </th>
+          <tr>
+            <th>Titel</th>
+          </tr>
 
           <tr>
             <td>Artikel 1</td>
-            <td>Bjorn Derudder</td>
-            <td>24/07/2005</td>
-            <td>01/12/2005</td>
           </tr>
 
         </table>
