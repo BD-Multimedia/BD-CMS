@@ -1,3 +1,14 @@
+<?php  
+  include_once("../functions.php");
+  session_start();
+  checkUserLogin();
+  $user = checkUserLogin();
+  if(!isUserAdmin($user))
+  {
+    redirect("You are not admin");
+  }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

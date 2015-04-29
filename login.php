@@ -8,7 +8,7 @@
 
 	if(isset($_SESSION['user'])){
 		$user = $_SESSION['user'];
-		header('location:index.php');
+		redirect("You are already logged in.");
 	}
 
 

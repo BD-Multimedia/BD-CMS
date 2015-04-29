@@ -83,8 +83,7 @@
     	} else if ( (time() - $_SESSION['time']) > $minutes*60) {
         	session_destroy();
         	session_start();
-        	$_SESSION['error'] = "You have been logged out automatically for security.";
-        	header('location:redirect.php');
+        	redirect("You have been logged out automatically for security.");
     	}
 	}
 
@@ -92,7 +91,7 @@
 	function isUserAdmin($user){
 		$connection = connectDB();
 
-	    $stmt = $connection->prepare('SELECT ADMIN FROM `cms_project_users` WHERE name=? ');
+	    $stmt = $connection->prepare('SELECT ADMIN FROM `cms_project_users` WHERE email=? ');
 	    $stmt-> bind_param('s', $user);
 	    $stmt->execute();
 	    $result = $stmt-> get_result();
