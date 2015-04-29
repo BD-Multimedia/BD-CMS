@@ -44,22 +44,37 @@
 
 	</header>
 
-	<nav id="main-nav">
-		<button class="btn btn-default" id="menu-button-close">Close Menu</button>
-		<h2>Main menu</h2>
-		<ul>
-			<?php 
-				menu();
-				if(isset($_SESSION['user']))
-				{
-					?>
-			<li><a href="<?php print $_SERVER['PHP_SELF'] ?>?logout=true">logout</a></li>
-					<?php
-				}
-			?>
-		</ul>
 
-	</nav>
+	<section id="menu">
+		<button class="btn btn-default" id="menu-button-close">Close Menu</button>
+		
+		<nav id="main-nav">
+			
+			<h2>Main menu</h2>
+			<ul>
+				<?php 
+					menu();
+					if(isset($_SESSION['user']))
+					{
+						?>
+				<li><a href="<?php print $_SERVER['PHP_SELF'] ?>?logout=true">logout</a></li>
+						<?php
+					}
+				?>
+			</ul>
+
+		</nav>
+
+		<nav id="admin-nav">
+		
+			<ul>
+
+				<li><a href="#">Link</a></li>
+
+			</ul>
+
+		</nav>
+	</section>
 
 	<div class="container">
 

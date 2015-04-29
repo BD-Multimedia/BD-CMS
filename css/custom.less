@@ -35,7 +35,7 @@ html, body {
 	}
 }
 
-#main-nav {
+#menu {
 	background-color: @main-nav-bg - 2;
 	height: 100%;
 	position: absolute;
@@ -54,52 +54,55 @@ html, body {
 		margin-top: 30px
 	}
 
-	h2 {
-		border-bottom: 2px solid @main-nav-h2;
-		color: @main-nav-h2;
-		line-height: 90px;
-		margin: 0 auto;
-		padding: 0;
-		text-align: center;
-		width: 80%;
-	}
+	#main-nav {
 
-	ul {
-		list-style: none;
-		margin: 0;
-		margin-top: 25px;
-		padding: 0;
-
-		li {
+		h2 {
+			border-bottom: 2px solid @main-nav-h2;
+			color: @main-nav-h2;
+			line-height: 90px;
+			margin: 0 auto;
+			padding: 0;
 			text-align: center;
+			width: 80%;
+		}
 
-			a {
-				color: @main-nav-link;
-				display: block;
-				font-size: 17px;
-				padding-top: 10px;
-				padding-bottom: 10px;
-				text-decoration: none;
+		ul {
+			list-style: none;
+			margin: 0;
+			margin-top: 25px;
+			padding: 0;
 
-				&:hover {
-					background-color: @main-nav-link-bg-hover;
-				}
+			li {
+				text-align: center;
 
-				&.active {
-					background-color: @main-nav-link-bg-hover;
+				a {
+					color: @main-nav-link;
+					display: block;
+					font-size: 17px;
+					padding-top: 10px;
+					padding-bottom: 10px;
+					text-decoration: none;
+
+					&:hover {
+						background-color: @main-nav-link-bg-hover;
+					}
+
+					&.active {
+						background-color: @main-nav-link-bg-hover;
+					}
 				}
 			}
-		}
 
-		li#cmsbanner {
-			position: absolute;
-			bottom: 0;
-			width: 100%;
-		}
-		li#login {
-			position: absolute;
-			bottom: 75px;
-			width: 100%;
+			li#cmsbanner {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+			}
+			li#login {
+				position: absolute;
+				bottom: 75px;
+				width: 100%;
+			}
 		}
 	}
 }
