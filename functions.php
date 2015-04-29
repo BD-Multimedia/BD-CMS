@@ -170,9 +170,6 @@
 	        	}
 	    	}
 	    }
-	    print '<li id="cmsbanner">
-					Powered by BD_CMS by <a href="http://www.bdmultimedia.be">BD Multimedia</a>
-				</li>';
 		print '</ul>';
 
 		print '</nav>';
@@ -226,6 +223,9 @@
 		{
 			print'<li><a href="'.$_SERVER['PHP_SELF'].'?logout=true">logout</a></li>';
 		}
+		print '<li id="cmsbanner">
+					Powered by BD_CMS by <a href="http://www.bdmultimedia.be">BD Multimedia</a>
+				</li>';
 
 	    print '</ul>
 
