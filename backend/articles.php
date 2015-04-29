@@ -20,6 +20,7 @@ $webtitle = getContent('webtitle');
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet" type="text/css">
     <link href="css/backend.less" rel="stylesheet/less" type="text/css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <script src="js/jquery.js"></script>
     <script src="js/less.js"></script>
@@ -58,9 +59,11 @@ $webtitle = getContent('webtitle');
       <section class="col-xs-12" id="articles">
 
         <table>
-          <tr>
-            <th>Artikels</th>
-          </tr>
+          <thead>
+            <tr>
+              <th colspan="2">Titel</th>
+            </tr>
+          </thead>
           <?php
           //foreachke van de artikels!
           $articles = getContentArray();
@@ -70,6 +73,7 @@ $webtitle = getContent('webtitle');
             ?>
           <tr>
             <td><?php print $article['Title']; ?></td>
+            <td><i class="fa fa-pencil-square"></i></td>
           </tr>
           <?php
           }
