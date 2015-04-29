@@ -1,6 +1,33 @@
 <?php 
 include_once('../functions.php');
+session_start();
 $webtitle = getContent('webtitle');
+
+if(isset($_POST['postArticle']))
+{
+  if(!empty($_POST['text']) && !empty($_POST['title']))
+  {
+    date_default_timezone_set("Europe/Brussels");
+    $text = nl2br($_POST['text']);
+    $title = $_POST['title'];
+    $author = $_SESSION['user'];
+    $date = date("Y-m-d");
+    $connection = connectDB();
+    $result = $connection ->query('SELECT  `id` FROM  `cms_project_articles` ORDER BY  `id` DESC LIMIT 1');
+    $array = $result->fetch_array(MYSQL_ASSOC);
+    $max_id = $array['id'];
+    $id = $max_id+1;
+    $show = 1;
+    $connection->close();
+    $connection = connectDB();
+    $stmt = $connection->prepare('INSERT INTO `cms_project_articles` (`id`, `Title`, `Date`, `Text`, `author`, `show`, `LastMod`) VALUES (?, ?, ?, ?, ?, ?, ?);');
+    $stmt-> bind_param('issssss', $id, $title, $date, $text, $author, $show, $date);
+    $stmt->execute();
+    $connection->close();
+    print 'succes';
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -58,21 +85,21 @@ $webtitle = getContent('webtitle');
 
       <section id="new-article" class="col-xs-12">
 
-      <form class="col-xs-12">
+      <form class="col-xs-12" method="post" action="<?php print $_SERVER['PHP_SELF']; ?>">
 
         <div class="form-group">
 
-          <input type="text" placeholder="Change Title" class="form-control" id="title">
+          <input name="title" type="text" placeholder="Change Title" class="form-control" id="title">
 
         </div>
 
         <div class="form-group">
 
-          <textarea placeholder="Type content here" class="form-control" rows="17" id="text"></textarea>
+          <textarea name="text" placeholder="Type content here" class="form-control" rows="17" id="text"></textarea>
 
         </div>
 
-        <button type="submit" class="btn btn-primary">Post article</button>
+        <button name="postArticle" type="submit" class="btn btn-primary">Post article</button>
 
       </form>
 

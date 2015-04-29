@@ -75,7 +75,9 @@
 
 					$pieces = explode("</p>",$article['Text']);
 					print $pieces[0];
-					print $pieces[1];
+					if(isset($pieces[1])){
+						print $pieces[1];
+					}
 					?>
 					<br/>...
 				</p>

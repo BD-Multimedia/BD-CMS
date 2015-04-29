@@ -14,9 +14,21 @@
 	}
 
 	function getUserInfo($user){
-		$contentArray = array();
 		$connection = connectDB();
 	    $stmt = $connection->prepare('SELECT id,name,email,ux,des,dev,info FROM `cms_project_users` WHERE name=? ');
+	    $stmt->bind_param('s', $user);
+	    $stmt->execute();
+	    $result = $stmt-> get_result();
+	    while($row = $result->fetch_array(MYSQL_ASSOC))
+		{
+			$contentArray[] = $row;
+		}
+		return $contentArray[0];
+	}
+
+	function getUserName($user){
+		$connection = connectDB();
+	    $stmt = $connection->prepare('SELECT name FROM `cms_project_users` WHERE email=? ');
 	    $stmt->bind_param('s', $user);
 	    $stmt->execute();
 	    $result = $stmt-> get_result();
