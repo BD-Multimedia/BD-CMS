@@ -45,22 +45,11 @@
 
 	</header>
 
-	<nav id="main-nav">
+	<section id="menu">
 		<button class="btn btn-default" id="menu-button-close">Close Menu</button>
-		<h2>Main menu</h2>
-		<ul>
-			<?php 
-				menu();
-				if(isset($_SESSION['user']))
-				{
-					?>
-			<li><a href="<?php print $_SERVER['PHP_SELF'] ?>?logout=true">logout</a></li>
-					<?php
-				}
-			?>
-		</ul>
-
-	</nav>
+		
+		<?php menu(); ?>
+	</section>
 
 	<div class="container">
 
