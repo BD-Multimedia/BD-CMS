@@ -54,56 +54,29 @@ $webtitle = getContent('webtitle');
       </div>
     </nav>
 
-    <div class="container-fluid">       
+    <div class="container-fluid">
 
-      <section class="col-xs-12" id="articles">
+      <section id="new-article" class="col-xs-12">
 
-        <a href="new-article.php">
-          <section class="col-xs-6 article-menu">
-          
-            <h3>Add new article</h3>
-          
-          </section>
-       </a>
+      <form class="col-xs-12">
 
-       <a href="#">
-          <section class="col-xs-6 article-menu">
-          
-            <h3>Show articles</h3>
-          
-          </section>
-       </a>
+        <div class="form-group">
 
-        <table>
-          <thead>
-            <tr>
-              <th class="padding-left">Title</th>
-              <th class="hidden-xs">Author</th>
-              <th class="hidden-xs text-center">Date</th>
-              <th class="hidden-xs hidden-sm text-center">Last modified</th>
-              <th></th>
-            </tr>
-          </thead>
-          <?php
-          //foreachke van de artikels!
-          $articles = getContentArray();
-          //print_r($articles);
-          foreach($articles as $article)
-          {
-            ?>
-          <tr>
-            <td><?php print $article['Title']; ?></td>
-            <td class="hidden-xs"><?php print $article['author'] ?></td>
-            <td class="hidden-xs text-center"><?php print $article['Date'] ?></td>
-            <td class="hidden-xs hidden-sm text-center"><?php print $article['LastMod'] ?></td>
-            <td class="text-right"><button class="btn btn-primary"><i class="fa fa-pencil-square"></i></button></td>
-          </tr>
-          <?php
-          }
-          ?>
-        </table>
+          <input type="text" placeholder="Change Title" class="form-control" id="title">
 
-      </section>      
+        </div>
+
+        <div class="form-group">
+
+          <textarea placeholder="Type content here" class="form-control" rows="17" id="text"></textarea>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Post article</button>
+
+      </form>
+
+      </section>  
 
     </div>
 

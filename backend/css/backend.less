@@ -13,9 +13,23 @@
 	}
 }
 
+
+
 #articles {
-	table {
+
+	.article-menu {
+		background-color: #2c2c2c;
+		height: 100px;
+		border: 2px solid #ffffff;
 		margin-top: 25px;
+		margin-bottom: 25px;
+
+		h3 {
+			color: #F5F5F5;
+		}
+	}
+
+	table {
 		width: 100%;
 
 		thead {
@@ -35,12 +49,31 @@
 			}
 		}
 
-			td {
-				border-bottom: 1px solid #2c2c2c;
-				padding-top: 10px;
-				padding-bottom: 10px;
-			}
+		td {
+			border-bottom: 1px solid #2c2c2c;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}	
+	}
+}	
 
-		}
-	}	
-}
+
+ #new-article {
+ 	form {
+ 		margin-top: 25px;
+
+ 		input#title {
+ 			border: none;
+ 			border-bottom: 1px solid #2c2c2c;
+ 			box-shadow: none;
+ 			font-size: 25px;
+ 			height: auto;
+ 		}
+
+ 		textarea#text {
+ 			border: none;
+ 			box-shadow: none;
+ 			resize: none;
+ 		}
+ 	}
+ }
