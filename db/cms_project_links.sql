@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: localhost
--- Genereertijd: 29 apr 2015 om 14:18
+-- Genereertijd: 29 apr 2015 om 15:13
 -- Serverversie: 5.6.13
 -- PHP-versie: 5.4.17
 
@@ -42,8 +42,7 @@ INSERT INTO `cms_project_links` (`inhoud`, `link`, `show`, `login`, `admin`) VAL
 ('Home', 'index.php', 1, 0, 0),
 ('About', 'about.php', 1, 0, 0),
 ('Admin', 'backend', 1, 2, 1),
-('Login', 'login.php', 1, 1, 0),
-('Personal', 'personal.php', 1, 2, 0),
+('Login', 'login.php', 1, 1, 1),
 ('How To', 'howto.php', 1, 0, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
