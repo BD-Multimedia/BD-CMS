@@ -1,6 +1,4 @@
 <?php
-	#jojoo
-
 	//this will be used to store all the funcitons!!
 	function getContentArray(){
 		$contentArray = array();
