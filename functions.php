@@ -13,6 +13,20 @@
 		return $contentArray;
 	}
 
+	function getContentArrayByID($id){
+		$contentArray = array();
+		$connection = connectDB();
+		$stmt = $connection->prepare('SELECT `id`,`Title`,`Date`,`Text`, `author`, `LastMod` FROM `cms_project_articles` WHERE id=?');
+		$stmt -> bind_param('i', $id);
+		$stmt->execute();
+		$result = $stmt-> get_result();
+		while($row = $result->fetch_array(MYSQL_ASSOC))
+		{
+			$contentArray[] = $row;
+		}
+		return $contentArray[0];
+	}
+
 	function getUserInfo($user){
 		$connection = connectDB();
 	    $stmt = $connection->prepare('SELECT id,name,email,ux,des,dev,info FROM `cms_project_users` WHERE name=? ');
@@ -36,7 +50,7 @@
 		{
 			$contentArray[] = $row;
 		}
-		return $contentArray[0];
+		return $contentArray[0]['name'];
 	}
 
 	function getSpecificContentArray($id){
@@ -103,7 +117,7 @@
 	function isUserAdmin($user){
 		$connection = connectDB();
 
-	    $stmt = $connection->prepare('SELECT ADMIN FROM `cms_project_users` WHERE email=? ');
+	    $stmt = $connection->prepare('SELECT ADMIN FROM `cms_project_users` WHERE name=? ');
 	    $stmt-> bind_param('s', $user);
 	    $stmt->execute();
 	    $result = $stmt-> get_result();

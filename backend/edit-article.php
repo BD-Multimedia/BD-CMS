@@ -1,6 +1,36 @@
 <?php 
 include_once('../functions.php');
+session_start();
 $webtitle = getContent('webtitle');
+$id = $_GET['id'];
+$oldArticle = getContentArrayById($id);
+//print_r($oldArticle);
+
+if(isset($_POST['postArticle']))
+{
+  if(!empty($_POST['text']) && !empty($_POST['title']))
+  {
+    date_default_timezone_set("Europe/Brussels");
+    $text = nl2br($_POST['text']);
+    $title = $_POST['title'];
+    $author = $_SESSION['user'];
+    $date = date("Y-m-d");
+    $connection = connectDB();
+    $result = $connection ->query('SELECT  `id` FROM  `cms_project_articles` ORDER BY  `id` DESC LIMIT 1');
+    $array = $result->fetch_array(MYSQL_ASSOC);
+    $max_id = $array['id'];
+    $id = $max_id+1;
+    $show = 1;
+    $connection->close();
+    $connection = connectDB();
+    $stmt = $connection->prepare('INSERT INTO `cms_project_articles` (`id`, `Title`, `Date`, `Text`, `author`, `show`, `LastMod`) VALUES (?, ?, ?, ?, ?, ?, ?);');
+    $stmt-> bind_param('issssss', $id, $title, $date, $text, $author, $show, $date);
+    $stmt->execute();
+    $connection->close();
+    print 'succes';
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -54,56 +84,29 @@ $webtitle = getContent('webtitle');
       </div>
     </nav>
 
-    <div class="container-fluid">       
+    <div class="container-fluid">
 
-      <section class="col-xs-12" id="articles">
+      <section id="new-article" class="col-xs-12">
 
-        <a href="new-article.php">
-          <section class="col-xs-6 article-menu">
-          
-            <h3>Add new article</h3>
-          
-          </section>
-       </a>
+      <form class="col-xs-12" method="post" action="<?php print $_SERVER['PHP_SELF']; ?>">
 
-       <a href="#">
-          <section class="col-xs-6 article-menu">
-          
-            <h3>Show articles</h3>
-          
-          </section>
-       </a>
+        <div class="form-group">
 
-        <table>
-          <thead>
-            <tr>
-              <th class="padding-left">Title</th>
-              <th class="hidden-xs">Author</th>
-              <th class="hidden-xs text-center">Date</th>
-              <th class="hidden-xs hidden-sm text-center">Last modified</th>
-              <th></th>
-            </tr>
-          </thead>
-          <?php
-          //foreachke van de artikels!
-          $articles = getContentArray();
-          //print_r($articles);
-          foreach($articles as $article)
-          {
-            ?>
-          <tr>
-            <td><?php print $article['Title']; ?></td>
-            <td class="hidden-xs"><?php print $article['author'] ?></td>
-            <td class="hidden-xs text-center"><?php print $article['Date'] ?></td>
-            <td class="hidden-xs hidden-sm text-center"><?php print $article['LastMod'] ?></td>
-            <td class="text-right"><a href="edit-article.php?id=<?php print $article['id'] ?>"><button class="btn btn-primary"><i class="fa fa-pencil-square"></i></button></a></td>
-          </tr>
-          <?php
-          }
-          ?>
-        </table>
+          <input name="title" type="text" placeholder="Change Title" value="<?php print $oldArticle['Title']; ?>" class="form-control" id="title">
 
-      </section>      
+        </div>
+
+        <div class="form-group">
+
+          <textarea name="text" placeholder="Type content here" value="<?php print $oldArticle['Text']; ?>" class="form-control" rows="17" id="text"></textarea>
+
+        </div>
+
+        <button name="postArticle" type="submit" class="btn btn-primary">Edit article</button>
+
+      </form>
+
+      </section>  
 
     </div>
 

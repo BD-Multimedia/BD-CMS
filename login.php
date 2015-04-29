@@ -42,9 +42,9 @@
     		$stmt = $connection->prepare('UPDATE `cms_project_users` SET last_login = ? WHERE name=? ');
         	$stmt-> bind_param('ss', $date ,$user);
         	$stmt->execute();
-	   		$_SESSION['user'] = $user;
+	   		$_SESSION['user'] = getUserName($user);
     		header('location: backend/index.php');
-    		//print 'succes';
+    		//print_r($_SESSION['user']);
     	}else{
     		$error='passwords do not match. Please retry';
     	};
