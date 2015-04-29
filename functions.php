@@ -119,8 +119,8 @@
 
 	#function to connect to database
 	function connectDB(){
-		//$connection = new mysqli('localhost','root','usbw','test',3307);
-		$connection = new mysqli('bdmultimedia.be.mysql','bdmultimedia_be','t756114p05362','bdmultimedia_be');
+		$connection = new mysqli('localhost','root','usbw','test',3307);
+		//$connection = new mysqli('bdmultimedia.be.mysql','bdmultimedia_be','t756114p05362','bdmultimedia_be');
 		if($connection->connect_errno)
 		{
 			die('Connection Error: '.$connection->connect_errno);
