@@ -49,7 +49,6 @@ $webtitle = getContent('webtitle');
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
           </ul>
-          <
         </div>
       </div>
     </nav>
@@ -59,6 +58,9 @@ $webtitle = getContent('webtitle');
       <section class="col-xs-12" id="articles">
 
         <table>
+          <tr>
+            <th>Artikels</th>
+          </tr>
           <?php
           //foreachke van de artikels!
           $articles = getContentArray();
@@ -67,11 +69,7 @@ $webtitle = getContent('webtitle');
           {
             ?>
           <tr>
-            <th><?php print $article['Title']; ?></th>
-          </tr>
-
-          <tr>
-            <td><?php print $article['Text']; ?></td>
+            <td><?php print $article['Title']; ?></td>
           </tr>
           <?php
           }
