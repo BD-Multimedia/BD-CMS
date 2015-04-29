@@ -95,12 +95,14 @@
           <h3># Visitors</h3>
         </div>
 
+        <a href="articles.php">
         <div class="stat col-xs-6">
           <h3><?php print $numOfArticles; ?> Articles</h3>
         </div>
+        </a>
 
         <div class="stat col-xs-6">
-          <h3><?php print $numOfUsers; ?> Registered users</h3>
+          <h3><?php print $numOfUsers; ?> Users</h3>
         </div>
 
         <div class="stat col-xs-6">
