@@ -13,8 +13,6 @@
 		return $contentArray;
 	}
 
-	//lololol
-
 	function getUserInfo($user){
 		$contentArray = array();
 		$connection = connectDB();
