@@ -3,7 +3,7 @@
 	function getContentArray(){
 		$contentArray = array();
 		$connection = connectDB();
-		$stmt = $connection->prepare('SELECT `id`,`Title`,`Date`,`Text`, `author` FROM `cms_project_articles` ORDER BY id DESC');
+		$stmt = $connection->prepare('SELECT `id`,`Title`,`Date`,`Text`, `author`, `LastMod` FROM `cms_project_articles` ORDER BY id DESC');
 		$stmt->execute();
 		$result = $stmt-> get_result();
 		while($row = $result->fetch_array(MYSQL_ASSOC))

@@ -77,9 +77,9 @@ $webtitle = getContent('webtitle');
             ?>
           <tr>
             <td><?php print $article['Title']; ?></td>
-            <td class="hidden-xs">Bram Derudder</td>
-            <td class="hidden-xs text-center">24/07/1993</td>
-            <td class="hidden-xs hidden-sm text-center">24/07/1995</td>
+            <td class="hidden-xs"><?php print $article['author'] ?></td>
+            <td class="hidden-xs text-center"><?php print $article['Date'] ?></td>
+            <td class="hidden-xs hidden-sm text-center"><?php print $article['LastMod'] ?></td>
             <td class="text-right"><button class="btn btn-primary"><i class="fa fa-pencil-square"></i></button></td>
           </tr>
           <?php
