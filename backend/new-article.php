@@ -72,6 +72,7 @@ if(isset($_POST['postArticle']))
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="index.php">Dashboard</a></li>
+            <li><a href="users.php">Users</a></li>
             <li><a href="articles.php">Articles</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>

@@ -1,8 +1,41 @@
-<?php 
-include_once('../functions.php');
-$webtitle = getContent('webtitle');
-?>
+<?php  
+  include_once("../functions.php");
+  session_start();
+  //checkUserLogin();
+  $user = $_SESSION['user'];
+  if(!isUserAdmin($user))
+  {
+    redirect("You are not admin");
+  }
+  $user = checkUserLogin();
 
+  $webtitle = getContent('webtitle');
+
+
+  $connection = connectDB();
+  $stmt = $connection->prepare('SELECT COUNT(*) FROM `cms_project_articles`');
+    $stmt->execute();
+
+    $result = $stmt-> get_result();
+    
+    while($row =$result->fetch_array(MYSQL_ASSOC))
+    {
+        $numOfArticles = $row['COUNT(*)'];
+    }
+
+  $stmt = $connection->prepare('SELECT COUNT(*) FROM `cms_project_users`');
+    $stmt->execute();
+
+    $result = $stmt-> get_result();
+    
+    while($row =$result->fetch_array(MYSQL_ASSOC))
+    {
+        $numOfUsers = $row['COUNT(*)'];
+    }
+
+  
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,11 +49,11 @@ $webtitle = getContent('webtitle');
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet" type="text/css">
     <link href="css/backend.less" rel="stylesheet/less" type="text/css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <script src="js/jquery.js"></script>
     <script src="js/less.js"></script>
@@ -55,56 +88,43 @@ $webtitle = getContent('webtitle');
       </div>
     </nav>
 
-    <div class="container-fluid">       
+    <div class="container-fluid">
 
-      <section class="col-xs-12" id="articles">
+      <section id="users" class="col-xs-12">
+        <h2>Users</h2>
 
-        <a href="new-article.php">
-          <section class="col-xs-6 article-menu">
-          
-            <h3>Add new article</h3>
-          
-          </section>
-       </a>
+        <div class="stat col-xs-12 col-sm-6">
+          <h3># Users</h3>
+        </div>
 
-       <a href="#">
-          <section class="col-xs-6 article-menu">
-          
-            <h3>Show articles</h3>
-          
-          </section>
-       </a>
+        <div class="stat col-xs-12 col-sm-6">
+          <h3># Admins</h3>
+        </div>
+
+        <div class="stat col-xs-12 col-sm-6">
+          <h3>Add new user</h3>
+        </div>
 
         <table>
           <thead>
             <tr>
-              <th class="padding-left">Title</th>
-              <th class="hidden-xs">Author</th>
-              <th class="hidden-xs text-center">Date</th>
-              <th class="hidden-xs hidden-sm text-center">Last modified</th>
+              <th>Name</th>
+              <th class="hidden-xs">Admin</th>
               <th></th>
             </tr>
           </thead>
-          <?php
-          //foreachke van de artikels!
-          $articles = getContentArray();
-          //print_r($articles);
-          foreach($articles as $article)
-          {
-            ?>
+        
           <tr>
-            <td><?php print $article['Title']; ?></td>
-            <td class="hidden-xs"><?php print $article['author'] ?></td>
-            <td class="hidden-xs text-center"><?php print $article['Date'] ?></td>
-            <td class="hidden-xs hidden-sm text-center"><?php print $article['LastMod'] ?></td>
-            <td class="text-right"><a href="edit-article.php?id=<?php print $article['id'] ?>"><button class="btn btn-primary"><i class="fa fa-pencil-square"></i></button></a></td>
+            <td>Bram Derudder</td>
+            <td class="hidden-xs">Yes</td>
+            <td class="text-right"><a href="edit-user.php"><button class="btn btn-primary"><i class="fa fa-pencil-square"></i></button></a></td>
           </tr>
-          <?php
-          }
-          ?>
         </table>
 
-      </section>      
+
+
+      </section>
+
 
     </div>
 
