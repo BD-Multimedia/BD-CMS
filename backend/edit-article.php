@@ -2,32 +2,33 @@
 include_once('../functions.php');
 session_start();
 $webtitle = getContent('webtitle');
-$id = $_GET['id'];
-$oldArticle = getContentArrayById($id);
+if(isset($_GET['id'])){
+  $id = $_GET['id'];
+}else{
+  $id = $_POST['id'];
+}
+if(!isset($_POST['postArticle'])){
+  $oldArticle = getContentArrayById($id);
+}
 //print_r($oldArticle);
 
 if(isset($_POST['postArticle']))
 {
   if(!empty($_POST['text']) && !empty($_POST['title']))
   {
+    print $id;
     date_default_timezone_set("Europe/Brussels");
     $text = nl2br($_POST['text']);
     $title = $_POST['title'];
-    $author = $_SESSION['user'];
     $date = date("Y-m-d");
     $connection = connectDB();
-    $result = $connection ->query('SELECT  `id` FROM  `cms_project_articles` ORDER BY  `id` DESC LIMIT 1');
-    $array = $result->fetch_array(MYSQL_ASSOC);
-    $max_id = $array['id'];
-    $id = $max_id+1;
-    $show = 1;
     $connection->close();
     $connection = connectDB();
-    $stmt = $connection->prepare('INSERT INTO `cms_project_articles` (`id`, `Title`, `Date`, `Text`, `author`, `show`, `LastMod`) VALUES (?, ?, ?, ?, ?, ?, ?);');
-    $stmt-> bind_param('issssss', $id, $title, $date, $text, $author, $show, $date);
+    $stmt = $connection->prepare('UPDATE `cms_project_articles` SET `Title`=?, `Text`=?, `LastMod`=? WHERE id = ?');
+    $stmt-> bind_param('sssi', $title, $text, $date, $id);
     $stmt->execute();
     $connection->close();
-    print 'succes';
+    header('location:articles.php');
   }
 }
 
@@ -97,9 +98,13 @@ if(isset($_POST['postArticle']))
 
         </div>
 
+        <input type="hidden" name="id" value="<?php print($id); ?>">
+
         <div class="form-group">
 
-          <textarea name="text" placeholder="Type content here" value="<?php print $oldArticle['Text']; ?>" class="form-control" rows="17" id="text"></textarea>
+          <textarea name="text" placeholder="Type content here" value="" class="form-control" rows="17" id="text">
+            <?php print $oldArticle['Text']; ?>
+          </textarea>
 
         </div>
 
