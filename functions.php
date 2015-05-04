@@ -1,5 +1,5 @@
 <?php
-	//this will be used to store all the funcitons!!
+	//this will be used to store all the functions!!
 	function getContentArray(){
 		$contentArray = array();
 		$connection = connectDB();
@@ -266,5 +266,3 @@
 		</nav>';
 	}
 ?>
-
-			

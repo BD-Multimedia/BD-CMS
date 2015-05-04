@@ -1,6 +1,7 @@
 <?php 
 	session_start();
 	include_once('functions.php');
+	include('countlog.php');
 
 	if(isset($_GET['logout']) && $_GET['logout']=="true"){
 		logOut();

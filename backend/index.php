@@ -33,6 +33,21 @@
         $numOfUsers = $row['COUNT(*)'];
     }
 
+  $connection->close();
+
+  $datei = fopen("../countlog.txt","r");
+  $count = fgets($datei,1000);
+  fclose($datei);
+
+  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+//print("your ip:".$ip);
+
   
 
 ?>
@@ -93,7 +108,7 @@
         <h2>Website Stats</h2>
 
         <div class="stat col-xs-6">
-          <h3># Visitors</h3>
+          <h3><?php print($count); ?> Visitors</h3>
         </div>
 
         <a href="articles.php">
