@@ -11,6 +11,7 @@
 			$contentArray[] = $row;
 		}
 		return $contentArray;
+		$connection->close();
 	}
 
 	function getContentArrayByID($id){
@@ -25,6 +26,7 @@
 			$contentArray[] = $row;
 		}
 		return $contentArray[0];
+		$connection->close();
 	}
 
 	function getUserInfo($user){
@@ -38,6 +40,7 @@
 			$contentArray[] = $row;
 		}
 		return $contentArray[0];
+		$connection->close();
 	}
 
 	function getUserName($user){
@@ -51,6 +54,7 @@
 			$contentArray[] = $row;
 		}
 		return $contentArray[0]['name'];
+		$connection->close();
 	}
 
 	function getSpecificContentArray($id){
@@ -65,6 +69,7 @@
 			$contentArray[] = $row;
 		}
 		return $contentArray;
+		$connection->close();
 	}
 
 	//this is to get content on a template page
@@ -78,6 +83,7 @@
 	    {
 	        return $row['content'];
 	    }
+	    $connection->close();
 
 	}
 
@@ -94,6 +100,7 @@
 	    {
 	        return $row['COUNT(*)'];
 	    }
+	    $connection->close();
 	}
 
 	#this is to log the user out
@@ -123,6 +130,7 @@
 	    $result = $stmt-> get_result();
 	    $array = $result->fetch_array(MYSQL_ASSOC);
 	    return $array['ADMIN'];
+	    $connection->close();
 	}
 	
 	#function check user login

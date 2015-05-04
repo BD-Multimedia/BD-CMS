@@ -73,10 +73,10 @@
 				<p>
 					<?php 
 
-					$pieces = explode("</p>",$article['Text']);
-					print $pieces[0];
-					if(isset($pieces[1])){
-						print $pieces[1];
+					$pieces = explode("\n",$article['Text']);
+					print nl2br($pieces[0].$pieces[1]);
+					if(isset($pieces[3])){
+						print nl2br($pieces[2].$pieces[3]);
 					}
 					?>
 					<br/>...

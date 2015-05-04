@@ -71,7 +71,7 @@
 
 			<section class="article-content">
 				<p>
-					<?php print $article['Text']; ?>
+					<?php print nl2br($article['Text']); ?>
 				</p>
 			</section>
 

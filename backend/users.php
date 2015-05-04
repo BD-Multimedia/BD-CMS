@@ -13,27 +13,26 @@
 
 
   $connection = connectDB();
-  $stmt = $connection->prepare('SELECT COUNT(*) FROM `cms_project_articles`');
+  $stmt = $connection->prepare('SELECT COUNT(`id`) FROM `cms_project_articles`');
     $stmt->execute();
 
     $result = $stmt-> get_result();
     
     while($row =$result->fetch_array(MYSQL_ASSOC))
     {
-        $numOfArticles = $row['COUNT(*)'];
+        $numOfArticles = $row['COUNT(`id`)'];
     }
 
-  $stmt = $connection->prepare('SELECT COUNT(*) FROM `cms_project_users`');
+  $stmt = $connection->prepare('SELECT COUNT(`id`) FROM `cms_project_users`');
     $stmt->execute();
 
     $result = $stmt-> get_result();
     
     while($row =$result->fetch_array(MYSQL_ASSOC))
     {
-        $numOfUsers = $row['COUNT(*)'];
+        $numOfUsers = $row['COUNT(`id`)'];
     }
-
-  
+  $connection->close();  
 
 ?>
 <!DOCTYPE html>
@@ -94,11 +93,11 @@
         <h2>Users</h2>
 
         <div class="stat col-xs-12 col-sm-6">
-          <h3># Users</h3>
+          <h3><?php print $numOfUsers; ?> Users</h3>
         </div>
 
         <div class="stat col-xs-12 col-sm-6">
-          <h3># Admins</h3>
+          <h3><?php print $numOfUsers; ?> Admins</h3>
         </div>
 
         <div class="stat col-xs-12 col-sm-6">
@@ -110,15 +109,31 @@
             <tr>
               <th>Name</th>
               <th class="hidden-xs">Admin</th>
+              <th class="hidden-xs">Articles</th>
+              <th class="hidden-xs">Last-Login</th>
               <th></th>
             </tr>
           </thead>
-        
+
+          <?php 
+          $connection = connectDB();
+          $stmt = $connection->prepare('SELECT id,name,email,admin,last_login FROM `cms_project_users`');
+          $stmt->execute();
+          $result = $stmt-> get_result();
+          while($row = $result->fetch_array(MYSQL_ASSOC))
+          {?>
+
           <tr>
-            <td>Bram Derudder</td>
-            <td class="hidden-xs">Yes</td>
+            <td><?php print $row['name']; ?></td>
+            <td class="hidden-xs"><?php if($row['admin']==1){print 'yes';}else{print 'no';} ?></td>
+            <td class="hidden-xs"><?php print numberOfArticles($row['name']); ?></td>
+            <td class="hidden-xs"><?php print $row['last_login']; ?></td>
             <td class="text-right"><a href="edit-user.php"><button class="btn btn-primary"><i class="fa fa-pencil-square"></i></button></a></td>
           </tr>
+
+          <?php
+          }
+          ?>
         </table>
 
 

@@ -8,7 +8,7 @@ if(isset($_POST['postArticle']))
   if(!empty($_POST['text']) && !empty($_POST['title']))
   {
     date_default_timezone_set("Europe/Brussels");
-    $text = nl2br($_POST['text']);
+    $text = $_POST['text'];
     $title = $_POST['title'];
     $author = $_SESSION['user'];
     $date = date("Y-m-d");
