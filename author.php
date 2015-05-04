@@ -10,6 +10,11 @@
 		logOut();
 	}
 
+	if(!isset($_GET['author']))
+	{
+		header('location:index.php');
+	}
+
 	autoLogOut();
 ?>
 <!DOCTYPE html>

@@ -16,13 +16,10 @@ if(isset($_POST['postArticle']))
 {
   if(!empty($_POST['text']) && !empty($_POST['title']))
   {
-    print $id;
     date_default_timezone_set("Europe/Brussels");
-    $text = nl2br($_POST['text']);
+    $text = $_POST['text'];
     $title = $_POST['title'];
     $date = date("Y-m-d");
-    $connection = connectDB();
-    $connection->close();
     $connection = connectDB();
     $stmt = $connection->prepare('UPDATE `cms_project_articles` SET `Title`=?, `Text`=?, `LastMod`=? WHERE id = ?');
     $stmt-> bind_param('sssi', $title, $text, $date, $id);
@@ -30,6 +27,16 @@ if(isset($_POST['postArticle']))
     $connection->close();
     header('location:articles.php');
   }
+}
+
+if(isset($_POST['deleteArticle']))
+{
+    $connection = connectDB();
+    $stmt = $connection->prepare('DELETE FROM `cms_project_articles` WHERE id = ?');
+    $stmt-> bind_param('i', $id);
+    $stmt->execute();
+    $connection->close();
+    header('location:articles.php');
 }
 
 ?>
@@ -109,6 +116,7 @@ if(isset($_POST['postArticle']))
         </div>
 
         <button name="postArticle" type="submit" class="btn btn-primary">Edit article</button>
+        <button name="deleteArticle" type="submit" class="btn btn-primary">Delete article</button>
 
       </form>
 
