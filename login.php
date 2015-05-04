@@ -29,7 +29,7 @@
         $stmt->execute();
         $result = $stmt-> get_result();
         $array = $result->fetch_array(MYSQL_ASSOC);
-        $connection->close();
+
     	$stored_hash = $array['PASSWORD'];
 
 
@@ -39,10 +39,11 @@
     		date_default_timezone_set("Europe/Brussels");
 			$date = date("Y-m-d");
 			$connection = connectDB();
-    		$stmt = $connection->prepare('UPDATE `cms_project_users` SET last_login = ? WHERE name=? ');
+    		$stmt = $connection->prepare('UPDATE `cms_project_users` SET last_login = ? WHERE email=? ');
         	$stmt-> bind_param('ss', $date ,$user);
         	$stmt->execute();
 	   		$_SESSION['user'] = getUserName($user);
+	   		$connection->close();
     		header('location: backend/index.php');
     		//print_r($_SESSION['user']);
     	}else{
