@@ -48,7 +48,7 @@
 	<section id="menu">
 		<button class="btn btn-default" id="menu-button-close">Close Menu</button>
 		
-		<?php menu(); ?>
+		<?php menu('main'); ?>
 	</section>
 
 	<div class="container">

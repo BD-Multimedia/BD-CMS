@@ -164,7 +164,21 @@
 
 	#this is the function for the footer menu
 	# login=2 =>
-	function menu(){
+	function menu($function){
+		switch ($function) {
+			case 'main':
+				$menu ="";
+				break;
+
+			case 'article':
+				$menu ="../";
+				break;
+			
+			default:
+				$menu ="";
+				break;
+		}
+
 		$connection = connectDB();
 
 	    if(isset($_SESSION['user'])){
@@ -198,9 +212,9 @@
 		    	if($activelink == $_SERVER['PHP_SELF']){$active = "active";}else{$active=" ";};
 		        //print '<li>';
 		        if($row['inhoud'] == 'Login'){
-		        	print '<li id="login"><a href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
+		        	print '<li id="login"><a href="'.$menu.$row['link'].'">'.$row['inhoud'].'</a></li>';
 		        }else{
-		        	print '<li><a class="'.$active.'" href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
+		        	print '<li><a class="'.$active.'" href="'.$menu.$row['link'].'">'.$row['inhoud'].'</a></li>';
 	        	}
 	    	}
 	    }
@@ -243,9 +257,9 @@
 		    	if($activelink == $_SERVER['PHP_SELF']){$active = "active";}else{$active=" ";};
 		        //print '<li>';
 		        if($row['inhoud'] == 'Login'){
-		        	print '<li id="login"><a href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
+		        	print '<li id="login"><a href="'.$menu.$row['link'].'">'.$row['inhoud'].'</a></li>';
 		        }else{
-		        	print '<li><a class="'.$active.'" href="'.$row['link'].'">'.$row['inhoud'].'</a></li>';
+		        	print '<li><a class="'.$active.'" href="'.$menu.$row['link'].'">'.$row['inhoud'].'</a></li>';
 	        	}
 	    	}
 	    }

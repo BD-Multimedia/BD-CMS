@@ -2,6 +2,18 @@
 include_once('../functions.php');
 session_start();
 $webtitle = getContent('webtitle');
+
+$user = $_SESSION['user'];
+  if(!isUserAdmin($user))
+  {
+    redirect("You are not admin");
+  }
+  $user = checkUserLogin();
+
+$tpl_file = "template.php";
+$tpl_path = $_SERVER['DOCUMENT_ROOT']."/BD-CMS/backend/";
+$articles_path = $_SERVER['DOCUMENT_ROOT']."/BD-CMS/articles/";
+
 if(isset($_GET['id'])){
   $id = $_GET['id'];
 }else{
@@ -9,6 +21,7 @@ if(isset($_GET['id'])){
 }
 if(!isset($_POST['postArticle'])){
   $oldArticle = getContentArrayById($id);
+  $author = $oldArticle['author'];
 }
 //print_r($oldArticle);
 
@@ -25,6 +38,19 @@ if(isset($_POST['postArticle']))
     $stmt-> bind_param('sssi', $title, $text, $date, $id);
     $stmt->execute();
     $connection->close();
+
+    $data['Title'] = $title;
+    $data['Text'] = nl2br($text);
+    $data['Author'] = $_POST['author']; 
+    $data['Date'] = $date;
+
+    $placeholders = array("{Title}", "{Text}", "{Author}", "{Date}");
+    $tpl = file_get_contents($tpl_path.$tpl_file);
+    $new_article = str_replace($placeholders, $data, $tpl);
+    $html_file_name = $data['Title'].".php";
+    $fp = fopen($articles_path.$html_file_name, "w");
+    fwrite($fp, $new_article);
+    fclose($fp);
     header('location:articles.php');
   }
 }
@@ -106,6 +132,7 @@ if(isset($_POST['deleteArticle']))
         </div>
 
         <input type="hidden" name="id" value="<?php print($id); ?>">
+        <input type="hidden" name="author" value="<?php print($author); ?>">
 
         <div class="form-group">
 

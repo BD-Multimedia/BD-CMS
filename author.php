@@ -62,7 +62,7 @@
 	<section id="menu">
 		<button class="btn btn-default" id="menu-button-close">Close Menu</button>
 		
-		<?php menu(); ?>
+		<?php menu('main'); ?>
 	</section>
 
 	<section class="col-xs-12 col-md-8 col-md-offset-2" id="author">

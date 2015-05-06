@@ -48,7 +48,7 @@
 
 	<section id="menu">
 		<button class="btn btn-default" id="menu-button-close">Close Menu</button>
-		<?php menu(); ?>
+		<?php menu('main'); ?>
 	</section>
 
 	<div class="container">
@@ -74,7 +74,25 @@
 				<p>
 					<?php 
 
-					$pieces = explode("\n",$article['Text']);
+					$piece = explode("\n",$article['Text']);
+					$pieces = count($piece);
+					switch ($pieces) {
+						case 1:
+							print(nl2br($piece[0]));
+							break;
+
+						case 2:
+							print(nl2br($piece[0].$piece[1]));
+							break;
+						
+						case 3:
+							print(nl2br($piece[0].$piece[1].$piece[2]));
+							break;
+
+						default:
+							print(nl2br($piece[0].$piece[1].$piece[2]));
+							break;
+					}
 					print nl2br($pieces[0].$pieces[1]);
 					if(isset($pieces[3])){
 						print nl2br($pieces[2].$pieces[3]);
@@ -85,7 +103,7 @@
 			</section>
 
 			<footer>
-				<a href="article.php?id=<?php print $article['id']; ?>"><button class="btn col-xs-4">Read More <i class="fa fa-arrow-right"></i></button></a>
+				<a href="articles/<?php print $article['Title']; ?>.php"><button class="btn col-xs-4">Read More <i class="fa fa-arrow-right"></i></button></a>
 				<p class="article-data col-xs-8">
 					<i class="fa fa-pencil-square-o" style="font-size: 15px;"></i>
 					<em><a href="author.php?author=<?php print $article['author'] ?>" class="author"><?php print $article['author'] ?></a></em>

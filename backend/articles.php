@@ -1,6 +1,14 @@
 <?php 
+session_start();
 include_once('../functions.php');
 $webtitle = getContent('webtitle');
+
+$user = $_SESSION['user'];
+  if(!isUserAdmin($user))
+  {
+    redirect("You are not admin");
+  }
+  $user = checkUserLogin();
 ?>
 
 <!DOCTYPE html>
